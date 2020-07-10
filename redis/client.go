@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Hyingerrr/components/logger"
 	goredis "github.com/go-redis/redis/v7"
+	"github.com/hyingerrr/components/logger"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
