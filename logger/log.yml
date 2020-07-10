@@ -1,0 +1,14 @@
+logger:
+  output: stdout  # log输出方式，file/stdout
+  logger_level: INFO  # |DEBUG|INFO|WARN|ERROR|FATAL
+  logger_file: "" # 日志输出文件, 可配置绝对路径，也可以配置相对路径。
+  log_format_text: false # 设定日志格式，true: 普通plaintext (类似于log4j)，false: json
+  disable_report_caller: false # 是否禁止上报caller，true: 不上报，false：上报
+  #日志切割 同accesslog
+  log_rotate_bool: true  # 是否进行切割
+  log_max_size: 10  # 最大文件 size, 默认 100MB
+  log_max_age: 7  # 保留过期文件的最大时间间隔,单位是天(24h)
+  log_backup_count: 10 # 最大过期日志保留的个数,默认都保留
+  # 访问日志
+  access_log_output: stdout
+  access_log_file: ""

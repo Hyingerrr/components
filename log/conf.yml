@@ -1,0 +1,12 @@
+log_out_file: true  # 日志是否在文件，true => 文件 false => stdout
+log_file: ""    # 文件地址，建议写绝对路径
+log_level: INFO   # 日志等级  panic|fatal|error|warn|info|debug
+log_format: json  # 日志格式  json|console
+log_report_caller: true  # 是否显示文件:行号
+log_stack_trace: true  # 是否打印堆栈
+  # 日志切割
+log_max_size: 2   # 单个文件最大size
+log_max_age: 1   # 保留旧文件的最大天数
+log_backup_count: 5  # 保留旧文件的最大个数
+log_compress: true  # 是否压缩/归档旧文件
+
