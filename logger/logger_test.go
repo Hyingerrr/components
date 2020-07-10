@@ -24,7 +24,7 @@ func TestInit(t *testing.T) {
 		LogBackupCount:      2,
 	})
 
-	logInstance.Infof("test logger: %v", logFilePath)
+	LogClient.Infof("test logger: %v", logFilePath)
 
 	// 。。。
 
@@ -34,12 +34,12 @@ func TestInit(t *testing.T) {
 	for {
 		select {
 		case <-timer.C:
-			logInstance.Infof("test logger: %v", logFilePath)
-			logInstance.Errorf("test logger errorf: %v", "logFilePath")
-			logInstance.Debug("test logger debug: %v", time.Now())
-			logInstance.WithFields(logrus.Fields{"a": 1, "b": "111", "c": 1.1}).Warn("warning")
+			LogClient.Infof("test logger: %v", logFilePath)
+			LogClient.Errorf("test logger errorf: %v", "logFilePath")
+			LogClient.Debug("test logger debug: %v", time.Now())
+			LogClient.WithFields(logrus.Fields{"a": 1, "b": "111", "c": 1.1}).Warn("warning")
 		case <-timer2.C:
-			logInstance.Infof("Stop !!!")
+			LogClient.Infof("Stop !!!")
 			goto End
 		}
 	}

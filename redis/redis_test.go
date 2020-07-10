@@ -37,8 +37,7 @@ func TestRedisMgr_NewMgr(t *testing.T) {
 		client = NewMgr(WithConfigs(rdsConfigs), WithRedisLogger(logger.New()))
 	})
 
-	redis, err := client.GetClient("redis1")
-	it.NoError(err)
+	redis := client.GetClient("redis1")
 
 	redis.Set(key, val, time.Millisecond*200)
 }

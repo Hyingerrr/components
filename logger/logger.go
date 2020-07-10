@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	logInstance = New()
+	LogClient = New()
 )
 
 type Logger interface {
@@ -41,63 +41,63 @@ type Logger interface {
 }
 
 func SetLogger(l Logger) {
-	logInstance = l
+	LogClient = l
 }
 
 // todo  需要其他方法时，可以添加
 
 func SetOutput(output io.Writer) {
-	logInstance.SetOutput(output)
+	LogClient.SetOutput(output)
 }
 
 func Info(args ...interface{}) {
-	logInstance.Info(args...)
+	LogClient.Info(args...)
 }
 
 func Infof(format string, args ...interface{}) {
-	logInstance.Infof(format, args...)
+	LogClient.Infof(format, args...)
 }
 
 func Warn(args ...interface{}) {
-	logInstance.Warn(args...)
+	LogClient.Warn(args...)
 }
 
 func Warnf(format string, args ...interface{}) {
-	logInstance.Warnf(format, args...)
+	LogClient.Warnf(format, args...)
 }
 
 func Error(args ...interface{}) {
-	logInstance.Error(args...)
+	LogClient.Error(args...)
 }
 
 func Errorf(format string, args ...interface{}) {
-	logInstance.Errorf(format, args...)
+	LogClient.Errorf(format, args...)
 }
 
 func Panic(args ...interface{}) {
-	logInstance.Panic(args...)
+	LogClient.Panic(args...)
 }
 
 func Panicf(format string, args ...interface{}) {
-	logInstance.Panicf(format, args...)
+	LogClient.Panicf(format, args...)
 }
 
 func WithField(key string, value interface{}) Logger {
-	return logInstance.WithField(key, value)
+	return LogClient.WithField(key, value)
 }
 
 func WithFields(fields logrus.Fields) Logger {
-	return logInstance.WithFields(fields)
+	return LogClient.WithFields(fields)
 }
 
 func WithError(err error) Logger {
-	return logInstance.WithError(err)
+	return LogClient.WithError(err)
 }
 
 func Debug(args ...interface{}) {
-	logInstance.Debug(args...)
+	LogClient.Debug(args...)
 }
 
 func Debugf(format string, args ...interface{}) {
-	logInstance.Debugf(format, args...)
+	LogClient.Debugf(format, args...)
 }

@@ -1,18 +1,16 @@
 package redis
 
 import (
-	"fmt"
+	"github.com/Hyingerrr/components/logger"
+	goredis "github.com/go-redis/redis/v7"
+	"github.com/prometheus/client_golang/prometheus"
 	"sync"
 	"time"
-
-	goredis "github.com/go-redis/redis/v7"
-	"github.com/hyingerrr/components/logger"
-	"github.com/prometheus/client_golang/prometheus"
 )
 
 var (
-	defaultRedisMgr *Client
-	onceClient      sync.Once
+	RedisMgr   *Client
+	onceClient sync.Once
 )
 
 type Options func(*Client)
@@ -39,7 +37,7 @@ func WithRedisLogger(log logger.Logger) Options {
 
 func NewMgr(opts ...Options) *Client {
 	onceClient.Do(func() {
-		defaultRedisMgr = &Client{
+		RedisMgr = &Client{
 			clientMaps:  make(map[string]*goredis.Client),
 			configMaps:  make(map[string]*Config),
 			log:         logger.New(),
@@ -47,13 +45,13 @@ func NewMgr(opts ...Options) *Client {
 		}
 
 		for _, opt := range opts {
-			opt(defaultRedisMgr)
+			opt(RedisMgr)
 		}
 
-		defaultRedisMgr.loading()
+		RedisMgr.loading()
 	})
 
-	return defaultRedisMgr
+	return RedisMgr
 }
 
 func (mgr *Client) loading() {
@@ -100,19 +98,19 @@ func (mgr *Client) newRedisConnect(schema string, config *Config) *goredis.Clien
 	return cli
 }
 
-func (mgr *Client) GetClient(schema string) (*goredis.Client, error) {
+func (mgr *Client) GetClient(schema string) *goredis.Client {
 	if cli := mgr.hasClient(schema); cli != nil {
-		return cli, nil
+		return cli
 	}
 
 	mgr.log.Infof("redis schema[%s] not exist, new connect now...", schema)
 
 	// new client
 	if cfg, ok := mgr.configMaps[schema]; ok {
-		return mgr.newRedisConnect(schema, cfg), nil
+		return mgr.newRedisConnect(schema, cfg)
 	}
 
-	return nil, fmt.Errorf("redis client not found； schema[%v]", schema)
+	return nil
 }
 
 func (mgr *Client) hasClient(schema string) *goredis.Client {

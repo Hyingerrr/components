@@ -6,7 +6,7 @@ import (
 "sync"
 "time"
 
-"github.com/hyingerrr/components/logger"
+"github.com/Hyingerrr/components/logger"
 "github.com/prometheus/client_golang/prometheus"
 
 _ "github.com/go-sql-driver/mysql" // 必须引入！！！

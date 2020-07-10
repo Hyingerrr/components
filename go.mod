@@ -1,4 +1,4 @@
-module github.com/hyingerrr/components
+module github.com/Hyingerrr/components
 
 go 1.14
 
